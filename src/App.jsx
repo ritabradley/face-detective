@@ -17,7 +17,7 @@ const App = () => {
       <h1>Face Detective</h1>
       <Navigation />
       <Logo />
-      <div className="grid place-content-center w-5/6 m-auto mt-4">
+      <div className="grid place-content-center w-full m-auto mt-4 text-center">
         <Entries />
         <ImageForm />
       </div>
