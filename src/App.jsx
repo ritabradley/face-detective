@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Particles from "particles-bg";
 import Navigation from "./components/Navigation";
 import Logo from "./components/Logo";
@@ -5,6 +6,18 @@ import ImageForm from "./components/ImageForm";
 import Entries from "./components/Entries";
 
 const App = () => {
+  const [imgUrl, setImgUrl] = useState("");
+
+  const handleInputChange = (e) => {
+    console.log(e.target.value);
+    setImgUrl(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(imgUrl);
+  };
+
   return (
     <div>
       <Particles
@@ -19,7 +32,10 @@ const App = () => {
       <Logo />
       <div className="grid place-content-center w-full m-auto mt-4 text-center">
         <Entries />
-        <ImageForm />
+        <ImageForm
+          onInputChange={handleInputChange}
+          onButtonSubmit={handleSubmit}
+        />
       </div>
     </div>
   );

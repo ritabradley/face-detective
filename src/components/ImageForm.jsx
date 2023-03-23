@@ -1,4 +1,4 @@
-const ImageForm = () => {
+const ImageForm = ({ onInputChange, onButtonSubmit }) => {
   return (
     <form className="rounded-lg px-5 py-10 shadow-2xl input-bg-pattern">
       <div className="pb-6 text-lg md:text-xl">
@@ -17,10 +17,12 @@ const ImageForm = () => {
           type="text"
           id="image-link"
           placeholder="Insert link"
+          onChange={onInputChange}
         />
         <button
           className="absolute rounded-md bg-violet-400 px-4 py-2 text-sm font-medium font-bold uppercase text-white transition-colors duration-300 right-2.5 bottom-2.5 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-pink-300"
           type="submit"
+          onClick={onButtonSubmit}
         >
           Run Detector
         </button>
