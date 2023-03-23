@@ -12,10 +12,9 @@
 
 @layer utilities {
 	.input-bg-pattern {
-		background-color: #e2fefc;
-		opacity: 0.4;
-		background-image: linear-gradient(30deg, #d28adf 12%, transparent 12.5%, transparent 87%, #d28adf 87.5%, #d28adf), linear-gradient(150deg, #d28adf 12%, transparent 12.5%, transparent 87%, #d28adf 87.5%, #d28adf), linear-gradient(30deg, #d28adf 12%, transparent 12.5%, transparent 87%, #d28adf 87.5%, #d28adf), linear-gradient(150deg, #d28adf 12%, transparent 12.5%, transparent 87%, #d28adf 87.5%, #d28adf), linear-gradient(60deg, #d28adf77 25%, transparent 25.5%, transparent 75%, #d28adf77 75%, #d28adf77), linear-gradient(60deg, #d28adf77 25%, transparent 25.5%, transparent 75%, #d28adf77 75%, #d28adf77);
-		background-size: 24px 42px;
-		background-position: 0 0, 0 0, 12px 21px, 12px 21px, 0 0, 12px 21px;
+		background-image: url("./assets/mesh-pattern.png");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;
 	}
 }
