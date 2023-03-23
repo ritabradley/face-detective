@@ -2,6 +2,7 @@ import Particles from "particles-bg";
 import Navigation from "./components/Navigation";
 import Logo from "./components/Logo";
 import ImageForm from "./components/ImageForm";
+import Entries from "./components/Entries";
 
 const App = () => {
   return (
@@ -16,7 +17,10 @@ const App = () => {
       <h1>Face Detective</h1>
       <Navigation />
       <Logo />
-      <ImageForm />
+      <div className="grid place-content-center w-5/6 m-auto mt-4">
+        <Entries />
+        <ImageForm />
+      </div>
     </div>
   );
 };
