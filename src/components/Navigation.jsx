@@ -1,7 +1,7 @@
 const Navigation = () => {
   return (
     <div className="flex justify-end">
-      <p className="text-xl text-gray-900 hover:text-gray-400 underline p-3 cursor-pointer">
+      <p className="text-xl text-gray-900 hover:text-gray-300 underline p-3 cursor-pointer">
         Sign Out
       </p>
     </div>
