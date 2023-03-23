@@ -1,3 +1,3 @@
-const FaceDetection = () => {}
+const FaceDetection = () => {};
 
-export default FaceDetection
+export default FaceDetection;

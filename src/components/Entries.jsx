@@ -1,3 +1,3 @@
-const Entries = () => {}
+const Entries = () => {};
 
-export default Entries
+export default Entries;
