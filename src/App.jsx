@@ -11,6 +11,7 @@ const App = () => {
   const [input, setInput] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [faceData, setFaceData] = useState([]);
+  const [route, setRoute] = useState("signin");
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -92,17 +93,22 @@ const App = () => {
         bg={true}
       />
       <h1>Face Detective</h1>
-      <SignIn />
       <Navigation />
-      <Logo />
-      <div className="grid place-content-center text-center w-full max-w-4xl mt-6 mx-auto">
-        <Entries />
-        <ImageForm
-          onInputChange={handleInputChange}
-          onButtonSubmit={handleSubmit}
-        />
-        <FaceDetection imgUrl={imgUrl} faceData={faceData} />
-      </div>
+      {route === "signin" ? (
+        <SignIn />
+      ) : (
+        <div>
+          <Logo />
+          <div className="grid place-content-center text-center w-full max-w-4xl mt-6 mx-auto">
+            <Entries />
+            <ImageForm
+              onInputChange={handleInputChange}
+              onButtonSubmit={handleSubmit}
+            />
+            <FaceDetection imgUrl={imgUrl} faceData={faceData} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
