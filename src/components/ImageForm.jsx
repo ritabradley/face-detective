@@ -13,14 +13,14 @@ const ImageForm = ({ onInputChange, onButtonSubmit }) => {
       </label>
       <div className="relative">
         <input
-          className="block w-full rounded-lg border border-violet-300 bg-violet-50 p-4 text-sm text-purple-600 placeholder-violet-300 focus:ring-pink-500 focus:outline-pink-500 focus:border-pink-500"
+          className="block w-full rounded-lg border border-violet-300 bg-violet-50 p-4 text-sm text-purple-600 placeholder-violet-300 focus:ring-pink-500 focus:border-pink-500"
           type="text"
           id="image-link"
           placeholder="Insert link"
           onChange={onInputChange}
         />
         <button
-          className="absolute rounded-md bg-violet-400 px-4 py-2 text-sm font-medium font-bold uppercase text-white transition-colors duration-300 right-2.5 bottom-2.5 hover:bg-violet-500 focus:ring-4 focus:outline-none focus:ring-pink-300"
+          className="btn-primary absolute right-2.5 bottom-2.5"
           type="submit"
           onClick={onButtonSubmit}
         >
