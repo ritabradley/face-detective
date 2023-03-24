@@ -27,7 +27,6 @@ const App = () => {
     const USER_ID = "ritalbradley";
     const APP_ID = "face-detective";
     const MODEL_ID = "face-detection";
-    const MODEL_VERSION_ID = "6dc7e46bc9124c5c8824be4822abe105";
 
     const raw = JSON.stringify({
       user_app_id: {
