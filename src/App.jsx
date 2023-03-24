@@ -10,9 +10,14 @@ import FaceDetection from "./components/FaceDetection";
 const App = () => {
 	const [input, setInput] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
+	const [faceData, setFaceData] = useState([]);
 
 	const handleInputChange = (e) => {
 		setInput(e.target.value);
+	};
+
+	const handleFaceData = (data) => {
+		setFaceData(data);
 	};
 
 	const handleSubmit = (e) => {
@@ -50,7 +55,22 @@ const App = () => {
 		};
 		fetch("https://api.clarifai.com/v2/users/" + USER_ID + "/apps/" + APP_ID + "/models/" + MODEL_ID + "/outputs", requestOptions)
 			.then(response => response.json())
-			.then(result => console.log(result))
+			.then(result => {
+				const faceRegions = result.outputs[0].data.regions;
+				const imageElement = document.getElementById("input-image");
+				const width = Number(imageElement.width);
+				const height = Number(imageElement.height);
+				const faceData = faceRegions.map(region => {
+					const boundingBox = region.region_info.bounding_box;
+					return {
+						topRow: boundingBox.top_row * height,
+						rightCol: width - boundingBox.right_col * width,
+						bottomRow: height - boundingBox.bottom_row * height,
+						leftCol: boundingBox.left_col * width,
+					};
+				});
+				handleFaceData(faceData);
+			})
 			.catch(error => console.log("error", error));
 	};
 
@@ -67,13 +87,13 @@ const App = () => {
 			<Navigation/>
 			<Logo/>
 			<div
-				className="grid place-content-center w-full m-auto mt-4 text-center">
+				className="grid place-content-center text-center w-full max-w-4xl mt-6 mx-auto">
 				<Entries/>
 				<ImageForm
 					onInputChange={handleInputChange}
 					onButtonSubmit={handleSubmit}
 				/>
-				<FaceDetection imgUrl={imgUrl}/>
+				<FaceDetection imgUrl={imgUrl} faceData={faceData}/>
 			</div>
 		</div>
 	);
