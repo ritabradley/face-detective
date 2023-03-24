@@ -1,5 +1,5 @@
 const FaceDetection = ({imgUrl, faceData}) => {
-	const displayFaceBoxes = () => {
+	const displayBoundingBoxes = () => {
 		return faceData.map((face, index) => {
 			const {topRow, rightCol, bottomRow, leftCol} = face;
 			return (
@@ -24,7 +24,7 @@ const FaceDetection = ({imgUrl, faceData}) => {
 					<img className="w-full h-full object-fit" id="input-image"
 					     src={imgUrl} alt="face" width="100%"
 					     height="auto"/>
-					{displayFaceBoxes()}
+					{displayBoundingBoxes()}
 				</div> :
 				<p>No image to display</p>
 			}
