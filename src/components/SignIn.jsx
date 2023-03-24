@@ -16,7 +16,7 @@ const SignIn = () => {
             href="#"
             className="font-bold text-violet-500 hover:text-violet-600"
           >
-            sign up now
+            register for an account
           </a>
         </p>
       </div>
