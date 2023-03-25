@@ -12,11 +12,25 @@ const SignIn = ({ onRouteChange }) => {
   const [email, setEmail] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
     // Retrieve saved email and timestamp from localStorage
     const savedEmail = localStorage.getItem("email");
     const savedTimestamp = localStorage.getItem("emailTimestamp");
+
+    const isEmailValid = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    };
+
+    // Dummy function to simulate validating credentials against the database
+    const validateCredentials = (email, password) => {
+      // Replace this function with your actual API call to check email and password
+      return true;
+    };
 
     // Check if saved email and timestamp exist
     if (savedEmail && savedTimestamp) {
@@ -47,20 +61,33 @@ const SignIn = ({ onRouteChange }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let hasError = false;
+    let errorMessages = [];
 
-    if (email.trim() === "" || password.trim() === "") {
-      setErrorMessage("Please fill out all required fields.");
+    if (email.trim() === "" || !isEmailValid(email)) {
+      setEmailError(true);
+      hasError = true;
+      errorMessages.push("Please enter a valid email address.");
+    } else {
+      setEmailError(false);
+    }
+
+    if (password.trim() === "") {
+      setPasswordError(true);
+      hasError = true;
+      errorMessages.push("Password is required.");
+    } else {
+      setPasswordError(false);
+    }
+
+    if (hasError) {
+      setErrorMessage(errorMessages.join(" "));
       return;
     }
 
-    if (rememberMe) {
-      // Save email and current timestamp to localStorage
-      localStorage.setItem("email", email);
-      localStorage.setItem("emailTimestamp", Date.now());
-    } else {
-      // Clear saved email and timestamp if the rememberMe checkbox is not checked
-      localStorage.removeItem("email");
-      localStorage.removeItem("emailTimestamp");
+    if (!validateCredentials(email, password)) {
+      setErrorMessage("Invalid email or password. Please try again.");
+      return;
     }
 
     onRouteChange("home");
@@ -120,6 +147,8 @@ const SignIn = ({ onRouteChange }) => {
                   autoComplete="current-password"
                   required
                   className="signin-form-input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>

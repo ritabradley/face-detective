@@ -6,18 +6,58 @@ const Register = ({ onRouteChange }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isPasswordValid = (password) => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/])[A-Za-z\d~`!@#$%^&*()_+\-={[}\]|\\:;"'<,>.?/]{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let hasError = false;
+    let errorMessages = [];
 
-    if (
-      firstName.trim() === "" ||
-      email.trim() === "" ||
-      password.trim() === ""
-    ) {
-      setErrorMessage("Please fill out all required fields.");
+    if (firstName.trim() === "") {
+      setFirstNameError(true);
+      hasError = true;
+      errorMessages.push("First Name is required.");
+    } else {
+      setFirstNameError(false);
+    }
+
+    if (email.trim() === "" || !isEmailValid(email)) {
+      setEmailError(true);
+      hasError = true;
+      errorMessages.push("Please enter a valid email address.");
+    } else {
+      setEmailError(false);
+    }
+
+    if (password.trim() === "" || !isPasswordValid(password)) {
+      setPasswordError(true);
+      hasError = true;
+      errorMessages.push(
+        "Password must be at least 8 characters long, contain numbers, lowercase and uppercase letters, and any of the following special characters: ~`! @#$%^&*()_-+={[}]|:;\"'<,>.?/."
+      );
+    } else {
+      setPasswordError(false);
+    }
+
+    if (hasError) {
+      setErrorMessage(errorMessages.join(" "));
       return;
     }
+
+    // Your registration logic here
 
     onRouteChange("home");
   };
@@ -53,7 +93,9 @@ const Register = ({ onRouteChange }) => {
                   type="text"
                   autoComplete="given-name"
                   required
-                  className="signin-form-input"
+                  className={`signin-form-input ${
+                    firstNameError ? "border-red-500" : ""
+                  }`}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                 />
@@ -71,7 +113,9 @@ const Register = ({ onRouteChange }) => {
                   type="email"
                   autoComplete="email"
                   required
-                  className="signin-form-input"
+                  className={`signin-form-input ${
+                    emailError ? "border-red-500" : ""
+                  }`}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -89,7 +133,9 @@ const Register = ({ onRouteChange }) => {
                   type="password"
                   autoComplete="new-password"
                   required
-                  className="signin-form-input"
+                  className={`signin-form-input ${
+                    passwordError ? "border-red-500" : ""
+                  }`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
