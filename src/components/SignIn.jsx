@@ -1,9 +1,23 @@
+import {useState} from "react";
+import ForgotPassword from "./ForgotPassword";
+
 // TODO: We're going to use some OAuth magic to make the sign in process easier as well
 // TODO: Have a 'Sign In with Google' button
 // TODO: Have a 'Sign In with Facebook' button
 // TODO: Have a 'Sign In with Twitter' button
 
 const SignIn = ({ onRouteChange }) => {
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+
+  const handleForgotPasswordClick = (e) => {
+    e.preventDefault();
+    setShowForgotPassword(true);
+  };
+
+  if (showForgotPassword) {
+    return <ForgotPassword onRouteChange={onRouteChange} />;
+  }
+
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -75,6 +89,7 @@ const SignIn = ({ onRouteChange }) => {
                 <a
                   href="#"
                   className="font-medium text-violet-500 hover:text-violet-600"
+                  onClick={handleForgotPasswordClick}
                 >
                   Forgot your password?
                 </a>
