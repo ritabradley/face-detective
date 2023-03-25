@@ -98,14 +98,13 @@ const App = () => {
         bg={true}
       />
       <h1>Face Detective</h1>
-
+      <Navigation onRouteChange={handleRouteChange} />
       {route === "signin" ? (
         <SignIn onRouteChange={handleRouteChange} />
       ) : route === "register" ? (
         <Register onRouteChange={handleRouteChange} />
       ) : (
         <div>
-          <Navigation onRouteChange={handleRouteChange} />
           <Logo />
           <div className="grid place-content-center text-center w-full max-w-4xl mt-6 mx-auto">
             <Entries />
