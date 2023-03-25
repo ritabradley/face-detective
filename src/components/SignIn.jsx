@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ForgotPassword from "./ForgotPassword";
 
 // TODO: We're going to use some OAuth magic to make the sign in process easier as well
@@ -8,10 +8,54 @@ import ForgotPassword from "./ForgotPassword";
 
 const SignIn = ({ onRouteChange }) => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
+
+  useEffect(() => {
+    // Retrieve saved email and timestamp from localStorage
+    const savedEmail = localStorage.getItem("email");
+    const savedTimestamp = localStorage.getItem("emailTimestamp");
+
+    // Check if saved email and timestamp exist
+    if (savedEmail && savedTimestamp) {
+      const currentDate = new Date();
+      const savedDate = new Date(Number(savedTimestamp));
+      const daysPassed = (currentDate - savedDate) / (1000 * 60 * 60 * 24);
+
+      // Check if saved email is within the 14-day limit
+      if (daysPassed <= 14) {
+        setEmail(savedEmail);
+        setRememberMe(true);
+      } else {
+        // Clear saved email and timestamp if the 14-day limit has passed
+        localStorage.removeItem("email");
+        localStorage.removeItem("emailTimestamp");
+      }
+    }
+  }, []);
 
   const handleForgotPasswordClick = (e) => {
     e.preventDefault();
     setShowForgotPassword(true);
+  };
+
+  const handleRememberMeChange = (e) => {
+    setRememberMe(e.target.checked);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (rememberMe) {
+      // Save email and current timestamp to localStorage
+      localStorage.setItem("email", email);
+      localStorage.setItem("emailTimestamp", Date.now());
+    } else {
+      // Clear saved email and timestamp if the rememberMe checkbox is not checked
+      localStorage.removeItem("email");
+      localStorage.removeItem("emailTimestamp");
+    }
+
+    onRouteChange("home");
   };
 
   if (showForgotPassword) {
@@ -50,6 +94,8 @@ const SignIn = ({ onRouteChange }) => {
                   autoComplete="email"
                   required
                   className="signin-form-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -76,6 +122,8 @@ const SignIn = ({ onRouteChange }) => {
                   name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 rounded border-violet-300 text-violet-500 focus:ring-violet-500"
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
                 />
                 <label
                   htmlFor="remember-me"
@@ -98,7 +146,7 @@ const SignIn = ({ onRouteChange }) => {
 
             <div>
               <button
-                onClick={() => onRouteChange("home")}
+                onClick={handleSubmit}
                 type="submit"
                 className="signin-button"
               >
