@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import ForgotPassword from "./ForgotPassword";
+import ErrorAlert from "./ErrorAlert";
 
 // TODO: We're going to use some OAuth magic to make the sign in process easier as well
 // TODO: Have a 'Sign In with Google' button
@@ -10,6 +11,7 @@ const SignIn = ({ onRouteChange }) => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     // Retrieve saved email and timestamp from localStorage
@@ -45,6 +47,12 @@ const SignIn = ({ onRouteChange }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (email.trim() === "" || password.trim() === "") {
+      setErrorMessage("Please fill out all required fields.");
+      return;
+    }
+
     if (rememberMe) {
       // Save email and current timestamp to localStorage
       localStorage.setItem("email", email);
@@ -115,6 +123,7 @@ const SignIn = ({ onRouteChange }) => {
                 />
               </div>
             </div>
+            {errorMessage && <ErrorAlert alertMessage={errorMessage} />}
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input

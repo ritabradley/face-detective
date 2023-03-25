@@ -1,6 +1,27 @@
-import React from "react";
+import { useState } from "react";
+import ErrorAlert from "./ErrorAlert.jsx";
 
 const Register = ({ onRouteChange }) => {
+  const [firstName, setFirstName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (
+      firstName.trim() === "" ||
+      email.trim() === "" ||
+      password.trim() === ""
+    ) {
+      setErrorMessage("Please fill out all required fields.");
+      return;
+    }
+
+    onRouteChange("home");
+  };
+
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -33,6 +54,8 @@ const Register = ({ onRouteChange }) => {
                   autoComplete="given-name"
                   required
                   className="signin-form-input"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </div>
             </div>
@@ -49,6 +72,8 @@ const Register = ({ onRouteChange }) => {
                   autoComplete="email"
                   required
                   className="signin-form-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -65,13 +90,15 @@ const Register = ({ onRouteChange }) => {
                   autoComplete="new-password"
                   required
                   className="signin-form-input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
             </div>
-
+            {errorMessage && <ErrorAlert alertMessage={errorMessage} />}
             <div>
               <button
-                onClick={() => onRouteChange("home")}
+                onClick={handleSubmit}
                 type="submit"
                 className="signin-button"
               >
