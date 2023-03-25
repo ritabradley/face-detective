@@ -1,9 +1,12 @@
-const Navigation = () => {
+const Navigation = ({ onRouteChange }) => {
   return (
     <div className="flex justify-end">
-      <p className="cursor-pointer p-3 text-xl text-gray-900 underline hover:text-gray-300">
+      <a
+        onClick={() => onRouteChange("signin")}
+        className="cursor-pointer p-3 text-xl text-violet-700 underline hover:text-violet-500"
+      >
         Sign Out
-      </p>
+      </a>
     </div>
   );
 };

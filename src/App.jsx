@@ -21,6 +21,10 @@ const App = () => {
     setFaceData(data);
   };
 
+  const handleRouteChange = (route) => {
+    setRoute(route);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setImgUrl(input);
@@ -93,11 +97,12 @@ const App = () => {
         bg={true}
       />
       <h1>Face Detective</h1>
-      <Navigation />
+
       {route === "signin" ? (
-        <SignIn />
+        <SignIn onRouteChange={handleRouteChange} />
       ) : (
         <div>
+          <Navigation onRouteChange={handleRouteChange} />
           <Logo />
           <div className="grid place-content-center text-center w-full max-w-4xl mt-6 mx-auto">
             <Entries />

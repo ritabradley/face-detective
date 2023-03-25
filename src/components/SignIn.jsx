@@ -3,7 +3,7 @@
 // TODO: Have a 'Sign In with Facebook' button
 // TODO: Have a 'Sign In with Twitter' button
 
-const SignIn = () => {
+const SignIn = ({ onRouteChange }) => {
   return (
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -81,7 +81,11 @@ const SignIn = () => {
             </div>
 
             <div>
-              <button type="submit" className="signin-button">
+              <button
+                onClick={() => onRouteChange("home")}
+                type="submit"
+                className="signin-button"
+              >
                 Sign in
               </button>
             </div>
