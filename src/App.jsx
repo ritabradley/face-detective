@@ -6,6 +6,7 @@ import Logo from "./components/Logo";
 import ImageForm from "./components/ImageForm";
 import Entries from "./components/Entries";
 import FaceDetection from "./components/FaceDetection";
+import Register from "./components/Register.jsx";
 
 const App = () => {
   const [input, setInput] = useState("");
@@ -100,6 +101,8 @@ const App = () => {
 
       {route === "signin" ? (
         <SignIn onRouteChange={handleRouteChange} />
+      ) : route === "register" ? (
+        <Register onRouteChange={handleRouteChange} />
       ) : (
         <div>
           <Navigation onRouteChange={handleRouteChange} />
