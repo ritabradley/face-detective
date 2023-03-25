@@ -12,7 +12,8 @@ const App = () => {
   const [input, setInput] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [faceData, setFaceData] = useState([]);
-  const [route, setRoute] = useState("signin");
+  const [route, setRoute] = useState("home");
+  const [signedIn, setSignedIn] = useState(false);
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
@@ -23,7 +24,11 @@ const App = () => {
   };
 
   const handleRouteChange = (route) => {
-    setRoute(route);
+    route === "signout"
+      ? setSignedIn(false)
+      : route === "home"
+      ? setSignedIn(true)
+      : setRoute(route);
   };
 
   const handleSubmit = (e) => {
@@ -98,7 +103,7 @@ const App = () => {
         bg={true}
       />
       <h1>Face Detective</h1>
-      <Navigation onRouteChange={handleRouteChange} />
+      <Navigation isSignedIn={signedIn} onRouteChange={handleRouteChange} />
       {route === "signin" ? (
         <SignIn onRouteChange={handleRouteChange} />
       ) : route === "register" ? (
