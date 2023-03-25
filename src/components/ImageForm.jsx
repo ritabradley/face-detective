@@ -1,6 +1,6 @@
 const ImageForm = ({ onInputChange, onButtonSubmit }) => {
   return (
-    <form className="rounded-lg px-5 py-10 shadow-2xl input-bg-pattern">
+    <form className="rounded-lg px-5 py-10 shadow-2xl input-bg-pattern mb-10">
       <div className="pb-6 text-lg md:text-xl">
         <p className="pb-1">Our detective is ready to take new cases!</p>
         <p>Enter an image URL below to find some faces. 😉</p>
