@@ -12,7 +12,7 @@ const App = () => {
   const [input, setInput] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [faceData, setFaceData] = useState([]);
-  const [route, setRoute] = useState("home");
+  const [route, setRoute] = useState("signin");
   const [signedIn, setSignedIn] = useState(false);
 
   const handleInputChange = (e) => {
@@ -23,13 +23,18 @@ const App = () => {
     setFaceData(data);
   };
 
-  const handleRouteChange = (route) => {
-    route === "signout"
-      ? setSignedIn(false)
-      : route === "home"
-      ? setSignedIn(true)
-      : setRoute(route);
-  };
+  const handleRouteChange = (newRoute) => {
+  if (newRoute === "signout") {
+    setSignedIn(false);
+    setRoute("signin");
+  } else if (newRoute === "home") {
+    setSignedIn(true);
+    setRoute(newRoute);
+  } else {
+    setRoute(newRoute);
+  }
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

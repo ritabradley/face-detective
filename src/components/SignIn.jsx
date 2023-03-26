@@ -16,16 +16,15 @@ const SignIn = ({ onRouteChange }) => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
+  const isEmailValid = (email) => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+  };
+
   useEffect(() => {
     // Retrieve saved email and timestamp from localStorage
     const savedEmail = localStorage.getItem("email");
     const savedTimestamp = localStorage.getItem("emailTimestamp");
-
-    const isEmailValid = (email) => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    };
-
 
     // Check if saved email and timestamp exist
     if (savedEmail && savedTimestamp) {
@@ -81,39 +80,47 @@ const SignIn = ({ onRouteChange }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    let hasError = false;
-    let errorMessages = [];
+  e.preventDefault();
+  let hasError = false;
+  let errorMessages = [];
 
-    if (email.trim() === "" || !isEmailValid(email)) {
-      setEmailError(true);
-      hasError = true;
-      errorMessages.push("Please enter a valid email address.");
+  if (email.trim() === "" || !isEmailValid(email)) {
+    setEmailError(true);
+    hasError = true;
+    errorMessages.push("Please enter a valid email address.");
+  } else {
+    setEmailError(false);
+  }
+
+  if (password.trim() === "") {
+    setPasswordError(true);
+    hasError = true;
+    errorMessages.push("Password is required.");
+  } else {
+    setPasswordError(false);
+  }
+
+  if (hasError) {
+    setErrorMessage(errorMessages.join(" "));
+    return;
+  }
+
+  const signInResult = await handleSignIn(email, password);
+
+  if (signInResult) {
+    if (rememberMe) {
+      localStorage.setItem("email", email);
+      localStorage.setItem("emailTimestamp", new Date().getTime());
     } else {
-      setEmailError(false);
+      localStorage.removeItem("email");
+      localStorage.removeItem("emailTimestamp");
     }
+    onRouteChange("home");
+  } else {
+    setErrorMessage("Invalid email or password. Please try again.");
+  }
+};
 
-    if (password.trim() === "") {
-      setPasswordError(true);
-      hasError = true;
-      errorMessages.push("Password is required.");
-    } else {
-      setPasswordError(false);
-    }
-
-    if (hasError) {
-      setErrorMessage(errorMessages.join(" "));
-      return;
-    }
-
-    const signInResult = await handleSignIn(email, password);
-
-    if (signInResult) {
-      onRouteChange("home");
-    } else {
-      setErrorMessage("Invalid email or password. Please try again.");
-    }
-  };
 
   if (showForgotPassword) {
     return <ForgotPassword onRouteChange={onRouteChange} />;
