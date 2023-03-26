@@ -21,7 +21,33 @@ const Register = ({ onRouteChange }) => {
     return passwordRegex.test(password);
   };
 
-  const handleSubmit = (e) => {
+  const handleRegistration = async (name, email, password) => {
+    try {
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password
+        })
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        return data
+      } else {
+        throw new Error(data)
+      }
+    } catch (err) {
+      console.error("Error register your account", err)
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let hasError = false;
     let errorMessages = [];
@@ -57,9 +83,16 @@ const Register = ({ onRouteChange }) => {
       return;
     }
 
-    // Your registration logic here
+    const registrationResult = await handleRegistration(firstName, email, password)
 
-    onRouteChange("home");
+    if (registrationResult) {
+      onRouteChange("home");
+    } else {
+      setErrorMessage("Something went wrong. Please try again.")
+    }
+
+
+
   };
 
   return (
