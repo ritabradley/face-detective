@@ -73,8 +73,8 @@ const SignIn = ({ onRouteChange }) => {
       } else {
         throw new Error(data);
       }
-    } catch (error) {
-      console.error("Error signing in:", error);
+    } catch (err) {
+      console.error("Error signing in:", err);
       return null;
     }
   };
