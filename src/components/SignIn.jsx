@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import ForgotPassword from "./ForgotPassword";
 import ErrorAlert from "./ErrorAlert";
 
 // TODO: We're going to use some OAuth magic to make the sign in process easier as well
@@ -8,7 +7,6 @@ import ErrorAlert from "./ErrorAlert";
 // TODO: Have a 'Sign In with Twitter' button
 
 const SignIn = ({onRouteChange}) => {
-	const [showForgotPassword, setShowForgotPassword] = useState(false);
 	const [email, setEmail] = useState("");
 	const [rememberMe, setRememberMe] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -45,9 +43,9 @@ const SignIn = ({onRouteChange}) => {
 	}, []);
 
 	const handleForgotPasswordClick = (e) => {
-		e.preventDefault();
-		setShowForgotPassword(true);
-	};
+    e.preventDefault();
+    onRouteChange("forgotpassword"); // Change the route to forgotpassword
+  };
 
 	const handleRememberMeChange = (e) => {
 		setRememberMe(e.target.checked);
@@ -121,10 +119,6 @@ const SignIn = ({onRouteChange}) => {
 		}
 	};
 
-
-	if (showForgotPassword) {
-		return <ForgotPassword onRouteChange={onRouteChange}/>;
-	}
 
 	return (
 		<div
