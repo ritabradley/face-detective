@@ -26,11 +26,6 @@ const SignIn = ({ onRouteChange }) => {
       return emailRegex.test(email);
     };
 
-    // Dummy function to simulate validating credentials against the database
-    const validateCredentials = (email, password) => {
-      // Replace this function with your actual API call to check email and password
-      return true;
-    };
 
     // Check if saved email and timestamp exist
     if (savedEmail && savedTimestamp) {
@@ -59,7 +54,33 @@ const SignIn = ({ onRouteChange }) => {
     setRememberMe(e.target.checked);
   };
 
-  const handleSubmit = (e) => {
+  const handleSignIn = async (email, password) => {
+    try {
+      const response = await fetch("http://localhost:3000/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data);
+      }
+    } catch (error) {
+      console.error("Error signing in:", error);
+      return null;
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let hasError = false;
     let errorMessages = [];
@@ -85,12 +106,13 @@ const SignIn = ({ onRouteChange }) => {
       return;
     }
 
-    if (!validateCredentials(email, password)) {
-      setErrorMessage("Invalid email or password. Please try again.");
-      return;
-    }
+    const signInResult = await handleSignIn(email, password);
 
-    onRouteChange("home");
+    if (signInResult) {
+      onRouteChange("home");
+    } else {
+      setErrorMessage("Invalid email or password. Please try again.");
+    }
   };
 
   if (showForgotPassword) {

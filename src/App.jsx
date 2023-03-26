@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Particles from "particles-bg";
 import SignIn from "./components/SignIn";
 import Navigation from "./components/Navigation";
@@ -7,28 +7,13 @@ import ImageForm from "./components/ImageForm";
 import Entries from "./components/Entries";
 import FaceDetection from "./components/FaceDetection";
 import Register from "./components/Register.jsx";
-import axios from 'axios'
+
 const App = () => {
   const [input, setInput] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [faceData, setFaceData] = useState([]);
   const [route, setRoute] = useState("home");
   const [signedIn, setSignedIn] = useState(false);
-
-  useEffect(() => {
-  const fetchUsers = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/");
-      console.log(response.data)
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  };
-
-  fetchUsers();
-}, []);
-
-
 
   const handleInputChange = (e) => {
     setInput(e.target.value);
