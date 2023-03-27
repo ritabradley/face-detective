@@ -14,6 +14,13 @@ const App = () => {
 	const [faceData, setFaceData] = useState([]);
 	const [route, setRoute] = useState("signin");
 	const [signedIn, setSignedIn] = useState(false);
+	const [user, setUser] = useState({
+		userId: "",
+		name: "",
+		email: "",
+		entries: 0,
+		joined: ""
+	});
 
 	const handleInputChange = (e) => {
 		setInput(e.target.value);
@@ -34,7 +41,6 @@ const App = () => {
 			setRoute(newRoute);
 		}
 	};
-
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -98,6 +104,17 @@ const App = () => {
 			.catch((error) => console.log("error", error));
 	};
 
+	const loadUser = data => {
+		setUser({
+			userId: data.userId,
+			name: data.name,
+			email: data.email,
+			entries: data.entries,
+			joined: data.joined
+		});
+	};
+
+
 	return (
 		<div>
 			<Particles
@@ -111,7 +128,7 @@ const App = () => {
 			<Navigation isSignedIn={signedIn}
 			            onRouteChange={handleRouteChange}/>
 			{route === "signin" ? (
-				<SignIn onRouteChange={handleRouteChange}/>
+				<SignIn onRouteChange={handleRouteChange} loadUser={loadUser}/>
 			) : route === "register" ? (
 				<Register onRouteChange={handleRouteChange}/>
 			) : (
@@ -119,7 +136,7 @@ const App = () => {
 					<Logo/>
 					<div
 						className="grid place-content-center text-center w-full max-w-4xl mt-6 mx-auto">
-						<Entries/>
+						<Entries name={user.name} numOfEntries={user.entries}/>
 						<ImageForm
 							onInputChange={handleInputChange}
 							onButtonSubmit={handleSubmit}

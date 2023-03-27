@@ -6,7 +6,7 @@ import ErrorAlert from "./ErrorAlert";
 // TODO: Have a 'Sign In with Facebook' button
 // TODO: Have a 'Sign In with Twitter' button
 
-const SignIn = ({onRouteChange}) => {
+const SignIn = ({onRouteChange, loadUser}) => {
 	const [email, setEmail] = useState("");
 	const [rememberMe, setRememberMe] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -43,9 +43,9 @@ const SignIn = ({onRouteChange}) => {
 	}, []);
 
 	const handleForgotPasswordClick = (e) => {
-    e.preventDefault();
-    onRouteChange("forgotpassword"); // Change the route to forgotpassword
-  };
+		e.preventDefault();
+		onRouteChange("forgotpassword"); // Change the route to forgotpassword
+	};
 
 	const handleRememberMeChange = (e) => {
 		setRememberMe(e.target.checked);
@@ -105,7 +105,15 @@ const SignIn = ({onRouteChange}) => {
 
 		const signInResult = await handleSignIn(email, password);
 
+
 		if (signInResult) {
+			loadUser({
+				userId: signInResult.userId,
+				name: signInResult.name,
+				email: signInResult.email,
+				entries: signInResult.entries,
+				joined: signInResult.joined,
+			});
 			if (rememberMe) {
 				localStorage.setItem("email", email);
 				localStorage.setItem("emailTimestamp", new Date().getTime());
