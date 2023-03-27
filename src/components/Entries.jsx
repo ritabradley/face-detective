@@ -1,4 +1,4 @@
-const Entries = ({ name = "Rita", numOfEntries = 5 }) => {
+const Entries = ({ name, numOfEntries}) => {
   return (
     <div className="text-violet-600 text-xl md:text-2xl my-8">
       {name}, your current entry count is...{" "}
