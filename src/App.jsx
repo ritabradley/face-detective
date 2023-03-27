@@ -7,7 +7,6 @@ import ImageForm from "./components/ImageForm";
 import Entries from "./components/Entries";
 import FaceDetection from "./components/FaceDetection";
 import Register from "./components/Register";
-import ForgotPassword from "./components/ForgotPassword";
 
 const App = () => {
 	const [input, setInput] = useState("");
@@ -115,8 +114,6 @@ const App = () => {
 				<SignIn onRouteChange={handleRouteChange}/>
 			) : route === "register" ? (
 				<Register onRouteChange={handleRouteChange}/>
-			) : route === "forgotpassword" ? ( // Add the forgotpassword route condition
-				<ForgotPassword onRouteChange={handleRouteChange}/>
 			) : (
 				<div>
 					<Logo/>

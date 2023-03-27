@@ -120,14 +120,6 @@ const Register = ({onRouteChange}) => {
 						>
       sign in.
     </span>{" "}
-						If you forgot your password,{" "}
-						<span
-							className="text-violet-500 hover:text-violet-600 cursor-pointer"
-							onClick={() => onRouteChange("forgotpassword")}
-						>
-      click here
-    </span>{" "}
-						to reset it.
 					</>
 				);
 			} else {

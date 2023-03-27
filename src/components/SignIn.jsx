@@ -196,16 +196,6 @@ const SignIn = ({onRouteChange}) => {
 									Remember me
 								</label>
 							</div>
-
-							<div className="text-sm">
-								<a
-									href="#"
-									className="font-medium text-violet-500 hover:text-violet-600"
-									onClick={handleForgotPasswordClick}
-								>
-									Forgot your password?
-								</a>
-							</div>
 						</div>
 
 						<div>
