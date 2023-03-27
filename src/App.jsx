@@ -8,6 +8,7 @@ import Entries from "./components/Entries";
 import FaceDetection from "./components/FaceDetection";
 import Register from "./components/Register";
 
+
 const App = () => {
 	const [input, setInput] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
@@ -21,6 +22,16 @@ const App = () => {
 		entries: 0,
 		joined: ""
 	});
+
+	const loadUser = data => {
+		setUser({
+			userId: data.userId,
+			name: data.name,
+			email: data.email,
+			entries: data.entries,
+			joined: data.joined
+		});
+	};
 
 	const handleInputChange = (e) => {
 		setInput(e.target.value);
@@ -100,18 +111,22 @@ const App = () => {
 					};
 				});
 				handleFaceData(faceData);
+				fetch("http://localhost:3000/image", {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({userId: user.userId})
+				})
+					.then(res => res.json())
+					.then(updatedEntries => { // Log the received updated entries
+						setUser(prevUser => ({
+							...prevUser,
+							entries: updatedEntries
+						}));
+					});
 			})
 			.catch((error) => console.log("error", error));
-	};
-
-	const loadUser = data => {
-		setUser({
-			userId: data.userId,
-			name: data.name,
-			email: data.email,
-			entries: data.entries,
-			joined: data.joined
-		});
 	};
 
 
