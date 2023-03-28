@@ -145,7 +145,7 @@ const App = () => {
 			{route === "signin" ? (
 				<SignIn onRouteChange={handleRouteChange} loadUser={loadUser}/>
 			) : route === "register" ? (
-				<Register onRouteChange={handleRouteChange}/>
+				<Register onRouteChange={handleRouteChange} loadUser={loadUser}/>
 			) : (
 				<div>
 					<Logo/>

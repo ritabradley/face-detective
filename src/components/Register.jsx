@@ -1,7 +1,7 @@
 import {useState} from "react";
 import ErrorAlert from "./ErrorAlert.jsx";
 
-const Register = ({onRouteChange}) => {
+const Register = ({onRouteChange, loadUser}) => {
 	const [firstName, setFirstName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -105,6 +105,7 @@ const Register = ({onRouteChange}) => {
 			const registrationResult = await handleRegistration(firstName, email, password);
 
 			if (registrationResult) {
+				loadUser(registrationResult);
 				onRouteChange("home");
 			} else {
 				setErrorMessage("Something went wrong. Please try again.");
