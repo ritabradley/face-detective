@@ -151,7 +151,6 @@ const App = () => {
 				type="cobweb"
 				bg={true}
 			/>
-			<h1>Face Detective</h1>
 			<Navigation isSignedIn={signedIn}
 			            onRouteChange={handleRouteChange}/>
 			{route === "signin" ? (
