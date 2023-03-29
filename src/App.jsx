@@ -121,7 +121,7 @@ const App = () => {
 					};
 				});
 				handleFaceData(faceData);
-				fetch("http://localhost:3000/image", {
+				fetch("https://face-detective-api.onrender.com/image", {
 					method: "PUT",
 					headers: {
 						"Content-Type": "application/json"

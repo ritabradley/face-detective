@@ -53,7 +53,7 @@ const SignIn = ({onRouteChange, loadUser}) => {
 
 	const handleSignIn = async (email, password) => {
 		try {
-			const response = await fetch("http://localhost:3000/signin", {
+			const response = await fetch("https://face-detective-api.onrender.com/signin", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

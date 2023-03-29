@@ -24,7 +24,7 @@ const Register = ({onRouteChange, loadUser}) => {
 	const handleRegistration = async (name, email, password) => {
 		try {
 			// Check if the email already exists
-			const checkEmailResponse = await fetch("http://localhost:3000/check-email", {
+			const checkEmailResponse = await fetch("https://face-detective-api.onrender.com/check-email", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
@@ -39,7 +39,7 @@ const Register = ({onRouteChange, loadUser}) => {
 			}
 
 			// If the email doesn't exist, continue with registration
-			const registerResponse = await fetch("http://localhost:3000/register", {
+			const registerResponse = await fetch("https://face-detective-api.onrender.com/register", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
