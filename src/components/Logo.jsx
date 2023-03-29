@@ -4,7 +4,7 @@ import logo from "../assets/face-detective-icon.png";
 const Logo = () => {
   return (
     <Tilt
-      className="flex items-center justify-center rounded-md shadow-lg bg-reverse-gradient"
+      className="flex items-center justify-center rounded-md shadow-lg bg-reverse-gradient ml-4"
       perspective={500}
       glareEnable={true}
       glareMaxOpacity={0.45}
