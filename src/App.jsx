@@ -118,15 +118,17 @@ const App = () => {
 					},
 					body: JSON.stringify({userId: user.userId})
 				})
-					.then(res => res.json())
-					.then(updatedEntries => { // Log the received updated entries
+					.then(res => {
+						return res.json();
+					})
+					.then(updatedEntries => {
 						setUser(prevUser => ({
 							...prevUser,
-							entries: updatedEntries
+							entries: updatedEntries.entries
 						}));
 					});
 			})
-			.catch((error) => console.log("error", error));
+			.catch((error) => console.log("error"));
 	};
 
 
@@ -145,7 +147,8 @@ const App = () => {
 			{route === "signin" ? (
 				<SignIn onRouteChange={handleRouteChange} loadUser={loadUser}/>
 			) : route === "register" ? (
-				<Register onRouteChange={handleRouteChange} loadUser={loadUser}/>
+				<Register onRouteChange={handleRouteChange}
+				          loadUser={loadUser}/>
 			) : (
 				<div>
 					<Logo/>
