@@ -9,6 +9,7 @@ Face Detective is a web application that allows users to detect faces in images 
 - [Getting Started](#getting-started)
 - [Backend Repository](#backend-repository)
 - [Installation](#installation)
+- [Configuring Routes](#configuring-routes)
 - [Running the Application](#running-the-application)
 - [Submitting Issues](#submitting-issues)
 - [Contributing](#contributing)
@@ -24,11 +25,23 @@ This frontend application requires the Face Detective backend to function proper
 
 [Face Detective Backend Repository](https://github.com/ritabradley/face-detective-backend)
 
+Clone and follow the instructions in the backend repository README.md to set up and run the backend API.
+
 ## Installation
 
 1. Clone the repository: `git clone https://github.com/ritabradley/face-detective.git`
 2. Change to the project directory: `cd face-detective`
 3. Install the dependencies: `npm install` or `npm i`
+
+## Configuring Routes
+
+To use the backend API running on your local machine, you need to update the routes in the frontend application. Find and replace any references to `https://face-detective-api.onrender.com/[some-route]` with `http://localhost:3000/[some-route]` in the frontend codebase. 
+
+For example, in `App.jsx`, you'll want to change `https://face-detective-api.onrender.com/image` to `http://localhost:3000/image`. 
+
+You'll find the other routes in `SignIn.jsx` and `Register.jsx`. Make the changes accordingly.
+
+Save your changes.
 
 ## Running the Application
 
