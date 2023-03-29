@@ -24,5 +24,18 @@
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
     "vite": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ritabradley/face-detective.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ritabradley/face-detective/issues"
+  },
+  "homepage": "https://github.com/ritabradley/face-detective",
+  "author": {
+    "name": "Rita Bradley",
+    "email": "rita@ritabradley.dev",
+    "url": "https://ritabradley.dev"
   }
 }
