@@ -136,7 +136,7 @@ const App = () => {
 							...prevUser,
 							entries: updatedEntries.entries
 						}));
-					});
+					}).catch(err => console.error(err));
 			})
 			.catch((error) => console.log("error"));
 	};
