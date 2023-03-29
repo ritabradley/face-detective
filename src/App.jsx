@@ -45,6 +45,16 @@ const App = () => {
 		if (newRoute === "signout") {
 			setSignedIn(false);
 			setRoute("signin");
+			setUser({
+				userId: "",
+				name: "",
+				email: "",
+				entries: 0,
+				joined: ""
+			});
+			setInput("");
+			setImgUrl("");
+			setFaceData([]);
 		} else if (newRoute === "home") {
 			setSignedIn(true);
 			setRoute(newRoute);
