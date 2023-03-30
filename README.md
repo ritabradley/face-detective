@@ -29,9 +29,22 @@ Clone and follow the instructions in the backend repository README.md to set up 
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/ritabradley/face-detective.git`
-2. Change to the project directory: `cd face-detective`
-3. Install the dependencies: `npm install` or `npm i`
+1. Clone the repository: 
+``` bash 
+git clone https://github.com/ritabradley/face-detective.git
+```
+2. Change to the project directory: 
+```bash 
+cd face-detective
+```
+3. Install the dependencies: 
+```bash
+npm install
+``` 
+or 
+```bash
+npm i
+```
 
 ## Configuring Routes
 
@@ -45,7 +58,9 @@ Save your changes.
 
 ## Running the Application
 
-1. Run the development server: `npm run dev`
+1. Run the development server: 
+```bash
+npm run dev`
 2. Open your browser and navigate to `http://localhost:5173`.
 
 ## Submitting Issues
